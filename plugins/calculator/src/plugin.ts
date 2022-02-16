@@ -13,7 +13,7 @@ export const CalculatorPage = calculatorPlugin.provide(
   createRoutableExtension({
     name: 'CalculatorPage',
     component: () =>
-      import('./components/ExampleComponent').then(m => m.ExampleComponent),
+      import('./components/SimpleCalculator').then(m => m.SimpleCalculator),
     mountPoint: rootRouteRef,
   }),
 );
