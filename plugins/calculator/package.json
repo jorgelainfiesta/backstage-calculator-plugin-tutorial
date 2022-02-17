@@ -18,18 +18,20 @@
     "diff": "backstage-cli plugin:diff",
     "prepack": "backstage-cli prepack",
     "postpack": "backstage-cli postpack",
-    "clean": "backstage-cli clean"
+    "clean": "backstage-cli clean",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@backstage/core-components": "^0.8.8",
     "@backstage/core-plugin-api": "^0.6.0",
     "@backstage/theme": "^0.2.14",
-    "@interactors/material-ui": "^5.0.0-rc1.2",
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "4.0.0-alpha.57",
     "mathjs": "^10.1.1",
-    "react-use": "^17.2.4"
+    "react-use": "^17.2.4",
+    "@interactors/material-ui": "^5.0.0-rc1.2",
+    "@interactors/with-cypress": "^1.0.0-rc1.1"
   },
   "peerDependencies": {
     "react": "^16.13.1 || ^17.0.0"
@@ -45,6 +47,7 @@
     "@types/jest": "*",
     "@types/node": "*",
     "cross-fetch": "^3.0.6",
+    "cypress": "^9.5.0",
     "msw": "^0.35.0"
   },
   "files": [
