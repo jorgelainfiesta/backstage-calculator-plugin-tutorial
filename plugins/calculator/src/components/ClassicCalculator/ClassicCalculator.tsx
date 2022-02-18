@@ -1,7 +1,7 @@
 import {
   Content,
   ContentHeader,
-  SupportButton,
+  SupportButton
 } from '@backstage/core-components';
 import {
   Box,
@@ -13,7 +13,7 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import {
@@ -21,7 +21,7 @@ import {
   DEFAULT_STATE,
   KEYBOARD,
   processOperator,
-  showDigits,
+  showDigits
 } from './array-calculator';
 
 export const ClassicCalculator = () => {

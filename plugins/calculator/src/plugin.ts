@@ -1,4 +1,4 @@
-import { createPlugin, createRoutableExtension } from '@backstage/core-plugin-api';
+import { createPlugin } from '@backstage/core-plugin-api';
 
 import { calculatorRouteRef } from './routes';
 
@@ -8,4 +8,3 @@ export const calculatorPlugin = createPlugin({
     root: calculatorRouteRef,
   },
 });
-
