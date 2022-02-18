@@ -1,1 +1,3 @@
-export { calculatorPlugin, CalculatorPage } from './plugin';
+export { calculatorPlugin } from './plugin';
+export * from './extensions';
+export * from './routes';

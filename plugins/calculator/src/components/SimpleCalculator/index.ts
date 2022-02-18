@@ -1,1 +1,0 @@
-export { SimpleCalculator } from './SimpleCalculator';

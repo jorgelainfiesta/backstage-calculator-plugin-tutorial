@@ -1,6 +1,7 @@
 import React from 'react';
 import { createDevApp } from '@backstage/dev-utils';
-import { calculatorPlugin, CalculatorPage } from '../src/plugin';
+import { calculatorPlugin } from '../src/plugin';
+import { CalculatorPage } from '../src/extensions';
 
 createDevApp()
   .registerPlugin(calculatorPlugin)
