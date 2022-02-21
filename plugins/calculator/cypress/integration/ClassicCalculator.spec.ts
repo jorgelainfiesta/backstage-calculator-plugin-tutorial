@@ -1,16 +1,26 @@
-import { Button, HTML } from '@interactors/material-ui';
+import { Button, createInteractor, HTML } from '@interactors/material-ui';
 
 const CalculatorResult = HTML.extend<HTMLParagraphElement>(
   'calculator-result',
 ).selector('.calculator-results');
 
-const generateDigits = (digits: string) => {
-  return digits.split('').map(digit => Button(digit).click() );
-}
+const Calculator = createInteractor('Calculator')
+  .selector('.classic-calculator')
+  .actions({
+    async inputDigits(calculator, digits: string) {
+      for (const digit of digits) {
+        await calculator.find(Button(digit)).click()
+      }
+    }
+  })
+
+describe('The calculator plugin', () => {
+  beforeEach(() => cy.visit('/calculator'));
+})
 
 // Step 1
 describe('The simple calculator', () => {
-  beforeEach(() => cy.visit('http://localhost:3000/calculator'));
+  beforeEach(() => cy.visit('/calculator'));
   it('should show all buttons', () => {
     cy.expect([
       Button('C').exists(),
@@ -67,12 +77,10 @@ describe('The simple calculator', () => {
       CalculatorResult().has({ text: '124' })
     ]);
   })
-  it('should add two numbers correctly with function', () => {
-    cy.do(generateDigits('101+23='));
+  it('should add two numbers correctly with Interactor', () => {
+    cy.do(Calculator().inputDigits('101+23='));
     cy.expect([
       CalculatorResult().has({ text: '124' })
     ]);
   })
 })
-
-

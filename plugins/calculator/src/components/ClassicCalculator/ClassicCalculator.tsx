@@ -40,7 +40,7 @@ export const ClassicCalculator = () => {
       >
         <Grid item xs={4}>
           <Box sx={{ maxWidth: '260px' }}>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} className="classic-calculator">
               <Paper elevation={1} variant="outlined">
                 <Box sx={{ padding: '20px' }}>
                   <Typography
