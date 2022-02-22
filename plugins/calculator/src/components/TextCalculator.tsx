@@ -55,7 +55,6 @@ export const TextCalculator = () => {
                     onChange={event => {setHasError(false); setInputText(event.target.value)}}
                   />
                   <Button
-                    aria-label="Solve"
                     variant="contained"
                     color="primary"
                     size="large"

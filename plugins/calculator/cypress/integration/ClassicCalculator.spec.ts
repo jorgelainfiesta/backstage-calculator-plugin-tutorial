@@ -1,10 +1,10 @@
-import { Button, createInteractor, HTML } from '@interactors/material-ui';
+import { Button, createInteractor, Heading, HTML, Tab, TextField } from '@interactors/material-ui';
 
 const CalculatorResult = HTML.extend<HTMLParagraphElement>(
   'calculator-result',
 ).selector('.calculator-results');
 
-const Calculator = createInteractor('Calculator')
+const ClassicCalculator = createInteractor('Calculator')
   .selector('.classic-calculator')
   .actions({
     async inputDigits(calculator, digits: string) {
@@ -12,15 +12,32 @@ const Calculator = createInteractor('Calculator')
         await calculator.find(Button(digit)).click()
       }
     }
-  })
+  });
 
 describe('The calculator plugin', () => {
   beforeEach(() => cy.visit('/calculator'));
-})
 
-// Step 1
-describe('The simple calculator', () => {
-  beforeEach(() => cy.visit('/calculator'));
+  it('should render simple calculator by default', () => {
+    cy.expect([
+      Heading('Classic Calculator').exists(),
+      Tab('CLASSIC CALCULATOR').is({ active: true }),
+    ]);
+  });
+
+  it('should change to input calculator with tab', () => {
+    cy.do([
+      Tab('TEXT CALCULATOR').click(),
+    ]);
+    cy.expect([
+      Heading('Text-based Calculator').exists(),
+      Tab('TEXT CALCULATOR').is({ active: true }),
+    ]);
+  });
+});
+
+describe('The classic calculator', () => {
+  beforeEach(() => cy.visit('/calculator/classic'));
+
   it('should show all buttons', () => {
     cy.expect([
       Button('C').exists(),
@@ -43,6 +60,7 @@ describe('The simple calculator', () => {
       CalculatorResult().has({ text: '0' })
     ]);
   })
+
   it('should show inputted numbers in the result box', () => {
     cy.do([
       Button('1').click(),
@@ -53,6 +71,7 @@ describe('The simple calculator', () => {
       CalculatorResult().has({ text: '123' })
     ]);
   })
+
   it('should not add left 0s to the result box', () => {
     cy.do([
       Button('0').click(),
@@ -63,6 +82,7 @@ describe('The simple calculator', () => {
       CalculatorResult().has({ text: '56' })
     ]);
   });
+
   it('should add two numbers correctly', () => {
     cy.do([
       Button('1').click(),
@@ -76,11 +96,34 @@ describe('The simple calculator', () => {
     cy.expect([
       CalculatorResult().has({ text: '124' })
     ]);
-  })
+  });
+
   it('should add two numbers correctly with Interactor', () => {
-    cy.do(Calculator().inputDigits('101+23='));
+    cy.do(ClassicCalculator().inputDigits('101+23='));
     cy.expect([
       CalculatorResult().has({ text: '124' })
     ]);
   })
-})
+});
+
+describe('The text calculator', () => {
+  beforeEach(() => cy.visit('/calculator/text'));
+
+  it('should render initail state', () => {
+    cy.expect([
+      TextField('Math expression').exists(),
+      Button('=').exists(),
+      CalculatorResult().has({ text: '0' })
+    ])
+  });
+
+  it('should solve an expression', () => {
+    cy.do([
+      TextField('Math expression').fillIn('101+23'),
+      Button('=').click(),
+    ]);
+    cy.expect([
+      CalculatorResult().has({ text: '124' })
+    ]);
+  });
+});
