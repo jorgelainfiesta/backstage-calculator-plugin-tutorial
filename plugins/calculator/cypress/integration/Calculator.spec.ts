@@ -99,11 +99,13 @@ describe('The classic calculator', () => {
   });
 
   it('should add two numbers correctly with Interactor', () => {
-    cy.do(ClassicCalculator().inputDigits('101+23='));
+    cy.do([
+      ClassicCalculator().inputDigits('101+23=')
+    ]);
     cy.expect([
       CalculatorResult().has({ text: '124' })
     ]);
-  })
+  });
 });
 
 describe('The text calculator', () => {

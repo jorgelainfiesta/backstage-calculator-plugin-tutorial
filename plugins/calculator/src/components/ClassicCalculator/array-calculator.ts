@@ -4,7 +4,7 @@ const OPERATORS = ['/', '*', '-', '+'];
 const DELETE_KEY = '<';
 const RESET_KEY = 'C';
 const SOLVE_KEY = '=';
-const IS_EPHEMERAL_RESULT = 'er'; // TODO: if the users inputs without operator on a result, delete result
+// TODO: if the users inputs without operator on a result, delete result
 
 export const DEFAULT_STATE = ['0'];
 
